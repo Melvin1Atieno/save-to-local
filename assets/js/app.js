@@ -44,6 +44,8 @@ function newTweet(e){
     //add item to display 
     itemList.appendChild(li);
 
+    addItemToLocalStorage(item);
+
 }
 
 //remove item function
@@ -51,4 +53,33 @@ function removeItem(e){
     if(e.target.classList.contains('remove-item')){
         e.target.parentElement.remove();
     }
+}
+
+
+//function to add item to local storage
+function addItemToLocalStorage(item){
+    let items = getItemsFromStorage();
+    
+
+    //add the items to the arrat
+    items.push(item);
+
+    //convert items array to a string 
+    localStorage.setItem('items', JSON.stringify(items));
+    
+}
+
+//function to add items to local storage
+function getItemsFromStorage(){
+    let items;
+    const itemsList = localStorage.getItem('items')
+
+    //get the items. If null, return no items stored
+    if(itemsList=== null){
+        items = []
+    }else{
+        items = JSON.parse(itemsList);
+    }
+    //items from storage
+    return items;
 }
