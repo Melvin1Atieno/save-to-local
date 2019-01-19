@@ -8,6 +8,9 @@ eventListeners();
 function eventListeners(){
     //Form submission
     document.querySelector('#form').addEventListener('submit', newTweet);
+
+    //use delegation to remove item from list
+    itemList.addEventListener('click', removeItem);
 }
 
 
@@ -22,7 +25,7 @@ function newTweet(e){
     const item = document.querySelector('#item').value;
 
     // create a remove button
-    const removeBtn = document.createElement('a');
+    const removeBtn  = document.createElement('a');
 
     removeBtn.classList = 'remove-item';
     removeBtn.textContent = 'X';
@@ -41,4 +44,11 @@ function newTweet(e){
     //add item to display 
     itemList.appendChild(li);
 
+}
+
+//remove item function
+function removeItem(e){
+    if(e.target.classList.contains('remove-item')){
+        e.target.parentElement.remove();
+    }
 }
