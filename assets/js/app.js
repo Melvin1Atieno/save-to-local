@@ -11,6 +11,9 @@ function eventListeners(){
 
     //use delegation to remove item from list
     itemList.addEventListener('click', removeItem);
+
+    //check whether page has been loaded first
+    document.addEventListener('DOMContentLoaded',localSorageOnLoad );
 }
 
 
@@ -82,4 +85,32 @@ function getItemsFromStorage(){
     }
     //items from storage
     return items;
+}
+
+// displays local storage items when page is loaded
+function localSorageOnLoad(){
+    let items = getItemsFromStorage();
+
+    //loop through each item from storage and return it
+    items.forEach(function(item){
+
+        //Display items
+        const removeBtn  = document.createElement('a');
+
+        removeBtn.classList = 'remove-item';
+        removeBtn.textContent = 'X';
+
+        //create li element to display submitted items
+        const li =  document.createElement('li');
+        li.textContent = item; 
+
+        
+
+        //add remove button for every item displayed
+        li.appendChild(removeBtn);
+
+        //add item to display 
+        itemList.appendChild(li);
+
+    })
 }
