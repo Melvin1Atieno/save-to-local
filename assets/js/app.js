@@ -49,6 +49,8 @@ function newTweet(e){
 
     addItemToLocalStorage(item);
 
+    this.reset();
+
 }
 
 //remove item function
@@ -56,6 +58,10 @@ function removeItem(e){
     if(e.target.classList.contains('remove-item')){
         e.target.parentElement.remove();
     }
+    
+    //remove form storage 
+    removeItemFromStorage(e.target.parentElement.textContent);
+
 }
 
 
@@ -113,4 +119,26 @@ function localSorageOnLoad(){
         itemList.appendChild(li);
 
     })
+    
+    
 }
+///remove from local storage
+function removeItemFromStorage(item){
+    //get the items from the storage
+    let items =getItemsFromStorage();
+
+    //remove the 'X' from the anchor tag from the item text
+    const itemDelete = item.substring(0,item.length-1);
+
+    //loop through the items to remove the one equal to the one to be removed
+
+    items.forEach(function(itemto, index){
+        if(itemDelete === itemto){
+            items.splice(index, 1);
+        }
+    });
+
+    //save the data
+    localStorage.setItem('items',JSON.stringify(items));
+
+} 
