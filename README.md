@@ -24,4 +24,4 @@ To get the program running on your machine:
 
 1. Wish list
 2. To do list
-3. Literally store anything!!!
+3. Literally anything list!!!
